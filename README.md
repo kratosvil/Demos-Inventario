@@ -1,8 +1,8 @@
-# Coroto Inventario — Demo
+# iStore — Demo
 
-Demo interactivo de un sistema de caja e inventario para un club de arte.
-Funciona completamente en el navegador — sin backend, sin base de datos,
-los datos viven en memoria durante la sesion.
+Demo interactivo de un sistema de punto de venta e inventario para una
+tienda de equipos Apple. Funciona completamente en el navegador — sin
+backend, sin base de datos, los datos viven en memoria durante la sesion.
 
 ## Ver el demo
 
@@ -19,9 +19,9 @@ O clonar y abrir `index.html` directo en el navegador.
 
 ## Que incluye el demo
 
-- **Venta rapida** — carrito de productos, metodo de pago, descuenta stock
-- **Cuentas de clientes** — consumo acumulado, liquidacion, descuento de inversionista
-- **Productos** — CRUD, conversion caja/unidad, entradas/devoluciones, historial
+- **Venta rapida** — carrito de productos, metodo de pago (Tarjeta, Nequi, Efectivo), descuenta stock
+- **Cuentas de clientes** — consumo acumulado, liquidacion, descuento VIP
+- **Productos** — CRUD, entradas/devoluciones, historial de movimientos
 - **Reportes** — ventas por metodo de pago, por usuario, deuda pendiente
 - **Usuarios** — gestion de roles admin/encargado
 - **Manual integrado** — guia de cada modulo dentro de la app

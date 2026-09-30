@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Coroto</title>
+  <title>iStore — Punto de Venta & Inventario</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="favicon-16.png" type="image/png" sizes="16x16" />
@@ -16,8 +16,13 @@
   <section id="login-screen" class="screen visible">
     <div class="auth-card">
       <div class="brand">
-        <img class="brand-logo" src="logo-coroto.png" alt="Coroto Club" />
-        <span class="sub">Caja &amp; Inventario</span>
+        <svg class="brand-logo" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;max-width:190px;width:62%;height:auto;">
+          <rect x="4" y="8" width="32" height="32" rx="8" fill="#0071E3"/>
+          <rect x="10" y="18" width="8" height="12" rx="2" fill="#FFFFFF"/>
+          <rect x="20" y="14" width="10" height="16" rx="2" fill="#FFFFFF" opacity="0.8"/>
+          <text x="44" y="33" font-family="Inter,-apple-system,sans-serif" font-weight="700" font-size="26" fill="#1D1D1F" letter-spacing="-0.5">iStore</text>
+        </svg>
+        <span class="sub">Punto de Venta &amp; Inventario</span>
       </div>
       <div id="login-error" class="error-msg"></div>
       <form id="login-form">
@@ -26,10 +31,10 @@
           <input id="login-usuario" name="usuario" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required />
         </div>
         <div class="field">
-          <label for="login-password">Contraseña</label>
+          <label for="login-password">Contrasena</label>
           <div class="pw-field">
             <input id="login-password" name="password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required />
-            <button type="button" class="pw-toggle" data-toggle-for="login-password" aria-label="Mostrar contraseña">👁</button>
+            <button type="button" class="pw-toggle" data-toggle-for="login-password" aria-label="Mostrar contrasena">&#x1F441;</button>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block" id="login-submit">Entrar</button>
@@ -41,43 +46,53 @@
   <section id="password-screen" class="screen">
     <div class="auth-card">
       <div class="brand">
-        <img class="brand-logo" src="logo-coroto.png" alt="Coroto Club" />
-        <span class="sub">Nueva contraseña</span>
+        <svg class="brand-logo" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto;max-width:190px;width:62%;height:auto;">
+          <rect x="4" y="8" width="32" height="32" rx="8" fill="#0071E3"/>
+          <rect x="10" y="18" width="8" height="12" rx="2" fill="#FFFFFF"/>
+          <rect x="20" y="14" width="10" height="16" rx="2" fill="#FFFFFF" opacity="0.8"/>
+          <text x="44" y="33" font-family="Inter,-apple-system,sans-serif" font-weight="700" font-size="26" fill="#1D1D1F" letter-spacing="-0.5">iStore</text>
+        </svg>
+        <span class="sub">Nueva contrasena</span>
       </div>
-      <p class="muted">Tu contraseña es provisional. Cámbiala para poder seguir — no vuelve a pedirse hasta que quieras cambiarla de nuevo.</p>
+      <p class="muted">Tu contrasena es provisional. Cambiala para poder seguir.</p>
       <div id="password-error" class="error-msg"></div>
       <form id="password-form">
         <div class="field">
-          <label for="pw-actual">Contraseña actual</label>
+          <label for="pw-actual">Contrasena actual</label>
           <div class="pw-field">
             <input id="pw-actual" type="password" autocapitalize="off" autocorrect="off" spellcheck="false" required />
-            <button type="button" class="pw-toggle" data-toggle-for="pw-actual" aria-label="Mostrar contraseña">👁</button>
+            <button type="button" class="pw-toggle" data-toggle-for="pw-actual" aria-label="Mostrar contrasena">&#x1F441;</button>
           </div>
         </div>
         <div class="field">
-          <label for="pw-nueva">Contraseña nueva (mínimo 12 caracteres)</label>
+          <label for="pw-nueva">Contrasena nueva (minimo 12 caracteres)</label>
           <div class="pw-field">
             <input id="pw-nueva" type="password" minlength="12" autocapitalize="off" autocorrect="off" spellcheck="false" required />
-            <button type="button" class="pw-toggle" data-toggle-for="pw-nueva" aria-label="Mostrar contraseña">👁</button>
+            <button type="button" class="pw-toggle" data-toggle-for="pw-nueva" aria-label="Mostrar contrasena">&#x1F441;</button>
           </div>
         </div>
         <div class="field">
-          <label for="pw-confirma">Repetir contraseña nueva</label>
+          <label for="pw-confirma">Repetir contrasena nueva</label>
           <div class="pw-field">
             <input id="pw-confirma" type="password" minlength="12" autocapitalize="off" autocorrect="off" spellcheck="false" required />
-            <button type="button" class="pw-toggle" data-toggle-for="pw-confirma" aria-label="Mostrar contraseña">👁</button>
+            <button type="button" class="pw-toggle" data-toggle-for="pw-confirma" aria-label="Mostrar contrasena">&#x1F441;</button>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Cambiar y continuar</button>
       </form>
-      <p class="hint"><a href="#" id="logout-from-password">Cerrar sesión</a></p>
+      <p class="hint"><a href="#" id="logout-from-password">Cerrar sesion</a></p>
     </div>
   </section>
 
   <!-- ============ APP ============ -->
   <div id="app">
     <header class="topbar">
-      <img class="brand-mini" src="logo-coroto.png" alt="Coroto Club" />
+      <svg class="brand-mini" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" style="height:26px;width:auto;">
+        <rect x="4" y="8" width="32" height="32" rx="8" fill="#0071E3"/>
+        <rect x="10" y="18" width="8" height="12" rx="2" fill="#FFFFFF"/>
+        <rect x="20" y="14" width="10" height="16" rx="2" fill="#FFFFFF" opacity="0.8"/>
+        <text x="44" y="33" font-family="Inter,-apple-system,sans-serif" font-weight="700" font-size="26" fill="#1D1D1F" letter-spacing="-0.5">iStore</text>
+      </svg>
       <div class="user-box">
         <span id="user-nombre"></span>
         <span id="user-rol" class="role-badge"></span>
@@ -88,25 +103,25 @@
     <nav class="tabs" id="tabs"></nav>
 
     <main>
-      <!-- ---- Venta rápida ---- -->
+      <!-- ---- Venta rapida ---- -->
       <section class="view" data-view="venta">
         <div class="grid grid-2">
           <div class="card">
-            <h2>Venta rápida</h2>
+            <h2>Venta rapida</h2>
             <div id="venta-productos" class="product-grid"></div>
           </div>
           <div class="card">
             <h3>Carrito</h3>
-            <div id="carrito-items"><p class="muted" id="carrito-vacio">Sin productos todavía</p></div>
+            <div id="carrito-items"><p class="muted" id="carrito-vacio">Sin productos todavia</p></div>
             <div class="total-row">
               <span class="label">Total</span>
               <span class="value" id="carrito-total">$0</span>
             </div>
-            <h3 class="mt">Método de pago</h3>
+            <h3 class="mt">Metodo de pago</h3>
             <div class="payment-methods" id="metodo-pago-venta">
-              <button type="button" data-metodo="efectivo">Efectivo</button>
+              <button type="button" data-metodo="tarjeta">Tarjeta</button>
               <button type="button" data-metodo="nequi">Nequi</button>
-              <button type="button" data-metodo="llave">Llave</button>
+              <button type="button" data-metodo="efectivo">Efectivo</button>
             </div>
             <button class="btn btn-accent btn-block mt" id="confirmar-venta" disabled>Confirmar venta</button>
           </div>
@@ -117,7 +132,7 @@
       <section class="view" data-view="cuentas">
         <div class="card">
           <div class="flex-between">
-            <h2 id="clientes-titulo">Cuentas de clientes frecuentes</h2>
+            <h2 id="clientes-titulo">Cuentas de clientes</h2>
             <div style="display:flex;gap:8px">
               <button class="btn btn-ghost btn-sm" id="toggle-archivados-btn" data-admin-only>Ver archivados</button>
               <button class="btn btn-primary btn-sm" id="nuevo-cliente-btn">+ Nuevo cliente</button>
@@ -140,7 +155,7 @@
           <div class="mt" style="overflow-x:auto">
             <table>
               <thead>
-                <tr><th>Producto</th><th>Categoría</th><th class="num">Stock</th><th class="num">Costo/u</th><th class="num">Precio</th><th class="num">Margen</th><th></th></tr>
+                <tr><th>Producto</th><th>Categoria</th><th class="num">Stock</th><th class="num">Costo/u</th><th class="num">Precio</th><th class="num">Margen</th><th></th></tr>
               </thead>
               <tbody id="productos-tabla"></tbody>
             </table>
@@ -151,17 +166,17 @@
       <!-- ---- Reportes (admin) ---- -->
       <section class="view" data-view="reportes">
         <div class="card">
-          <h2>Ventas — por método de pago y por usuario</h2>
+          <h2>Ventas — por metodo de pago y por usuario</h2>
           <div class="payment-methods" id="reporte-modo-rango">
-            <button type="button" data-modo="horas" class="selected">Últimas horas</button>
+            <button type="button" data-modo="horas" class="selected">Ultimas horas</button>
             <button type="button" data-modo="fechas">Rango de fechas</button>
           </div>
           <div class="flex-between mt" id="reporte-filtro-horas">
             <div class="field" style="max-width:160px">
-              <label for="reporte-horas">Últimas horas</label>
+              <label for="reporte-horas">Ultimas horas</label>
               <input id="reporte-horas" type="number" value="24" min="1" />
             </div>
-            <button class="btn btn-cyan btn-sm" id="reporte-ventas-btn">Consultar</button>
+            <button class="btn btn-primary btn-sm" id="reporte-ventas-btn">Consultar</button>
           </div>
           <div class="flex-between mt" id="reporte-filtro-fechas" style="display:none">
             <div class="field" style="max-width:170px">
@@ -172,7 +187,7 @@
               <label for="reporte-hasta">Hasta</label>
               <input id="reporte-hasta" type="date" />
             </div>
-            <button class="btn btn-cyan btn-sm" id="reporte-ventas-fechas-btn">Consultar</button>
+            <button class="btn btn-primary btn-sm" id="reporte-ventas-fechas-btn">Consultar</button>
           </div>
           <div id="reporte-ventas-resultado" class="mt"></div>
         </div>
@@ -181,7 +196,7 @@
           <div id="reporte-deuda-resultado" class="mt"></div>
         </div>
         <div class="card">
-          <h2>Usuarios — activos, inactivos y quién los creó</h2>
+          <h2>Usuarios — activos, inactivos y quien los creo</h2>
           <div id="reporte-usuarios-resultado" class="mt"></div>
         </div>
       </section>
@@ -200,75 +215,75 @@
       <!-- ---- Manual (admin y encargado) ---- -->
       <section class="view" data-view="manual">
         <div class="card">
-          <h2>Manual — cómo funciona Coroto</h2>
-          <p class="muted">Guía rápida de cada módulo. Tocá un título para abrirlo — no hace falta memorizar nada, quedate acá cuando tengas dudas.</p>
+          <h2>Manual — como funciona iStore</h2>
+          <p class="muted">Guia rapida de cada modulo. Toca un titulo para abrirlo.</p>
 
           <details class="manual-item" open>
-            <summary>Venta rápida — cobrar algo al momento</summary>
+            <summary>Venta rapida — cobrar en el momento</summary>
             <div class="manual-body">
-              <p>Para cuando alguien pide algo y lo paga ahí mismo (no se queda consumiendo a cuenta).</p>
+              <p>Para ventas directas donde el cliente paga de inmediato.</p>
               <ol>
-                <li>Tocá los productos que pidió — se van sumando al carrito de la derecha.</li>
-                <li>Elegí el método de pago: Efectivo, Nequi o Llave.</li>
-                <li>Tocá "Confirmar venta". El stock se descuenta solo.</li>
+                <li>Selecciona los productos que el cliente quiere — se agregan al carrito.</li>
+                <li>Elige el metodo de pago: Tarjeta, Nequi o Efectivo.</li>
+                <li>Toca "Confirmar venta". El stock se descuenta automaticamente.</li>
               </ol>
             </div>
           </details>
 
           <details class="manual-item">
-            <summary>Cuentas — clientes que consumen y pagan después</summary>
+            <summary>Cuentas — clientes con credito o compras corporativas</summary>
             <div class="manual-body">
-              <p>Para mesas o clientes frecuentes que van pidiendo varias cosas y cierran la cuenta al final.</p>
+              <p>Para clientes empresariales o frecuentes que acumulan pedidos y pagan despues.</p>
               <ol>
-                <li><strong>Abrir cuenta:</strong> "+ Nuevo cliente", ponés un nombre (ej. "Mesa 3" o el nombre de la persona). Cualquiera puede abrir una cuenta, admin o encargado.</li>
-                <li><strong>Cargar consumo:</strong> entrá a la cuenta, elegí el producto y la cantidad, "Agregar" — todavía no cobra, solo lo va anotando.</li>
-                <li><strong>Cobrar (liquidar):</strong> cuando se van, entrá a la cuenta y liquidá — elegís el método de pago y se cierra el ciclo. Si el cliente es socio/inversionista con descuento, se aplica solo, no hay que calcular nada a mano.</li>
-                <li><strong>Archivar:</strong> si alguien no vuelve más, se puede archivar la cuenta — no se borra el historial, solo desaparece de la lista (se puede restaurar después con "Ver archivados").</li>
-                <li class="admin-only-hint" data-admin-only>Solo un admin puede marcar a un cliente como socio/inversionista con descuento — si sos encargado y hace falta, pedíselo a un admin.</li>
+                <li><strong>Abrir cuenta:</strong> "+ Nuevo cliente", pon un nombre (ej. "Empresa TechCorp" o el nombre del contacto).</li>
+                <li><strong>Cargar consumo:</strong> entra a la cuenta, elige el producto y la cantidad, "Agregar" — todavia no cobra, solo lo anota.</li>
+                <li><strong>Cobrar (liquidar):</strong> cuando el cliente paga, entra a la cuenta y liquida — elige el metodo de pago y se cierra el ciclo. Si es cliente VIP con descuento, se aplica automaticamente.</li>
+                <li><strong>Archivar:</strong> si un cliente ya no compra, se puede archivar la cuenta (se restaura desde "Ver archivados").</li>
+                <li class="admin-only-hint" data-admin-only>Solo un admin puede marcar a un cliente como VIP con descuento.</li>
               </ol>
             </div>
           </details>
 
           <details class="manual-item" data-admin-only>
-            <summary>Productos — catálogo, precios y stock</summary>
+            <summary>Productos — catalogo, precios y stock</summary>
             <div class="manual-body">
-              <p>Acá se maneja todo el inventario: qué se vende, a qué precio, y cuánto queda.</p>
+              <p>Aqui se administra todo el inventario: que se vende, a que precio, y cuanto queda.</p>
               <ul>
-                <li><strong>+ Nuevo producto:</strong> das de alta algo nuevo con su costo, precio de venta y stock inicial.</li>
-                <li><strong>Entrá a un producto</strong> para corregir precio/stock a mano, o para "Registrar entrada" (llegó mercancía del proveedor) y "Registrar devolución" (se le devuelve algo al proveedor).</li>
-                <li><strong>Dar de baja / Restaurar:</strong> si un producto se deja de vender, "Dar de baja" lo saca de las listas sin borrar su historial. "Ver archivados" lo muestra de nuevo para poder restaurarlo — hace falta restaurarlo (no crear uno nuevo con el mismo nombre) si vuelve a estar disponible.</li>
-                <li>El costo y el margen solo los ve el admin — el encargado ve el precio de venta, nunca cuánto costó.</li>
+                <li><strong>+ Nuevo producto:</strong> registra un equipo con su costo, precio de venta y stock inicial.</li>
+                <li><strong>Editar producto:</strong> corrige precio o stock, registra entradas (llego mercancia del proveedor) o devoluciones.</li>
+                <li><strong>Dar de baja / Restaurar:</strong> si un producto se descontinua, "Dar de baja" lo saca de las listas sin borrar su historial.</li>
+                <li>El costo y el margen solo los ve el admin — el vendedor ve unicamente el precio de venta.</li>
               </ul>
             </div>
           </details>
 
           <details class="manual-item" data-admin-only>
-            <summary>Reportes — plata, deuda y usuarios</summary>
+            <summary>Reportes — ventas, deuda y usuarios</summary>
             <div class="manual-body">
               <ul>
-                <li><strong>Ventas:</strong> cuánto entró y por qué método de pago (Efectivo/Nequi/Llave), y quién lo vendió. Se puede filtrar por las últimas horas o por un rango de fechas (ej. toda la semana).</li>
-                <li><strong>Deuda pendiente:</strong> quién todavía debe plata de una cuenta abierta.</li>
-                <li><strong>Usuarios:</strong> lista de quién tiene acceso, si está activo, y quién lo creó.</li>
+                <li><strong>Ventas:</strong> cuanto entro y por que metodo de pago (Tarjeta/Nequi/Efectivo), y quien vendio. Filtrable por horas o rango de fechas.</li>
+                <li><strong>Deuda pendiente:</strong> que clientes tienen saldo sin pagar.</li>
+                <li><strong>Usuarios:</strong> lista de quien tiene acceso, si esta activo, y quien lo creo.</li>
               </ul>
             </div>
           </details>
 
           <details class="manual-item" data-admin-only>
-            <summary>Usuarios — el equipo que usa la app</summary>
+            <summary>Usuarios — el equipo de la tienda</summary>
             <div class="manual-body">
               <ul>
-                <li><strong>+ Nuevo usuario:</strong> creás la cuenta con un rol (admin o encargado) y una contraseña provisional — la persona la cambia sola en su primer ingreso.</li>
-                <li><strong>Resetear contraseña:</strong> si alguien la olvida, le generás una nueva desde acá (⋯ al lado de su nombre).</li>
-                <li><strong>Desactivar:</strong> si alguien deja de trabajar en el club, se desactiva su acceso — no se borra su historial de ventas.</li>
+                <li><strong>+ Nuevo usuario:</strong> crea la cuenta con un rol (admin o encargado) y una contrasena provisional — la persona la cambia en su primer ingreso.</li>
+                <li><strong>Resetear contrasena:</strong> si alguien la olvida, se genera una nueva desde aqui.</li>
+                <li><strong>Desactivar:</strong> si alguien deja de trabajar en la tienda, se desactiva su acceso.</li>
               </ul>
             </div>
           </details>
 
           <details class="manual-item">
-            <summary>¿Admin o encargado? ¿Cuál es la diferencia?</summary>
+            <summary>Admin vs. Encargado — diferencias de rol</summary>
             <div class="manual-body">
-              <p><strong>Encargado:</strong> vende, abre/carga/cobra cuentas de clientes. No ve costos ni márgenes, no toca el catálogo ni los reportes.</p>
-              <p><strong>Admin:</strong> puede todo lo anterior, más manejar el catálogo de productos, ver reportes y costos, y gestionar usuarios.</p>
+              <p><strong>Encargado:</strong> vende, abre/carga/cobra cuentas de clientes. No ve costos ni margenes, no toca el catalogo ni los reportes.</p>
+              <p><strong>Admin:</strong> todo lo anterior, mas administrar el catalogo de productos, ver reportes y costos, y gestionar usuarios.</p>
             </div>
           </details>
         </div>
@@ -276,7 +291,7 @@
     </main>
   </div>
 
-  <!-- ============ MODAL genérico ============ -->
+  <!-- ============ MODAL generico ============ -->
   <div class="modal-backdrop" id="modal-backdrop">
     <div class="modal">
       <div class="modal-header">

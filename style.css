@@ -1,45 +1,36 @@
 /* =========================================================================
-   Coroto — sistema visual
-   ---------------------------------------------------------------------
-   Línea de diseño (ver docs/ARQUITECTURA.md §6): club de arte, no panel
-   corporativo — grafiti / pintura / tatuaje / ambiente relax, con
-   personalidad, sin cansar la vista en uso prolongado (turno de noche).
-   Compromiso deliberado: identidad expresiva en headers/acentos, alta
-   legibilidad en datos/números (esto es una caja registradora, no un
-   afiche) — tipografía display solo donde no compromete lectura rápida
-   de precios y cantidades.
+   iStore — sistema visual
+   -------------------------------------------------------------------------
+   Tema claro premium estilo Apple reseller. Fondos claros, tipografia
+   limpia (Inter), acento azul Apple, espacio generoso, UI invisible
+   que deja protagonismo al producto.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Anton&family=Work+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Base — carbón cálido, no negro puro ni azulado: menos fatiga en
-     turnos largos que un contraste blanco/negro puro. */
-  --bg: #1a1620;
-  --bg-2: #221c2b;
-  --surface: #2a2333;
-  --surface-2: #332b3f;
-  --border: #443a52;
+  --bg: #FFFFFF;
+  --bg-2: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-2: #F5F5F7;
+  --border: #D2D2D7;
 
-  /* Texto: hueso cálido en vez de blanco puro (contraste ~11:1, suave) */
-  --text: #f2eade;
-  --text-muted: #b3a3c2;
-  --text-dim: #8a7a99;
+  --text: #1D1D1F;
+  --text-muted: #86868B;
+  --text-dim: #AEAEB2;
 
-  /* Acentos "spray" — usados con moderación, nunca como fondo grande */
-  --spray-pink: #ff4d94;
-  --spray-yellow: #d4f13c;
-  --spray-cyan: #3ddbe0;
-  --spray-orange: #ff8a3d;
-  --spray-red: #ff5a5a;
+  --accent: #0071E3;
+  --success: #34C759;
+  --warning: #FF9500;
+  --danger: #FF3B30;
 
-  --radius: 10px;
+  --radius: 12px;
   --radius-lg: 16px;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 
-  --font-display: 'Permanent Marker', cursive;
-  --font-heading: 'Anton', sans-serif;
-  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -56,24 +47,19 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
-  /* Textura sutil tipo pared/concreto — sin imágenes externas */
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(255, 77, 148, 0.05), transparent 40%),
-    radial-gradient(circle at 85% 70%, rgba(61, 219, 224, 0.05), transparent 40%),
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, transparent 1px, transparent 3px);
   min-height: 100vh;
 }
 
-h1, h2, h3 { margin: 0 0 0.5em; font-family: var(--font-heading); letter-spacing: 0.02em; }
+h1, h2, h3 { margin: 0 0 0.5em; font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.01em; }
 h1 { font-size: 1.6rem; }
 h2 { font-size: 1.25rem; }
-h3 { font-size: 1rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; }
+h3 { font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.06em; font-weight: 600; }
 
-a { color: var(--spray-cyan); }
+a { color: var(--accent); }
 
 button, input, select, textarea { font-family: inherit; font-size: 1rem; color: inherit; }
 
-/* ---------- Layout raíz ---------- */
+/* ---------- Layout raiz ---------- */
 
 #app { display: none; min-height: 100vh; flex-direction: column; }
 #app.visible { display: flex; }
@@ -83,16 +69,12 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; color: 
 
 /* ---------- Pantalla de login / cambio de password ---------- */
 
-/* Sin `display` acá — lo pone `.screen`/`.screen.visible` (más abajo en
-   cascada pero misma especificidad de selector simple; un `display` acá
-   por ID le ganaría a `.screen{display:none}` y la pantalla nunca se
-   ocultaría de verdad tras el login). Estas reglas solo aportan el
-   centrado, que sí puede vivir en la regla por ID sin conflicto. */
 #login-screen, #password-screen {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  background: var(--bg-2);
 }
 #login-screen.visible, #password-screen.visible { display: flex; }
 
@@ -100,11 +82,10 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; color: 
   width: 100%;
   max-width: 380px;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 32px 28px;
   box-shadow: var(--shadow);
-  transform: rotate(-0.4deg);
 }
 
 .brand {
@@ -117,15 +98,14 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; color: 
   max-width: 190px;
   width: 62%;
   height: auto;
-  transform: rotate(-1deg);
-  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.4));
 }
 .brand .sub {
   display: block;
   margin-top: 6px;
   font-family: var(--font-heading);
   font-size: 0.8rem;
-  letter-spacing: 0.25em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   color: var(--text-dim);
   text-transform: uppercase;
 }
@@ -136,20 +116,15 @@ button, input, select, textarea { font-family: inherit; font-size: 1rem; color: 
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--text-muted);
   margin-bottom: 6px;
 }
-/* Base global (no solo dentro de `.field`): un select/input suelto
-   fuera de un `.field` — ej. el selector de producto y la cantidad en
-   "Agregar consumo" — quedaba con el fondo blanco nativo del navegador
-   y texto claro encima, ilegible. Cualquier input/select nuevo hereda
-   esto por defecto sin tener que acordarse de envolverlo en `.field`. */
 input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea {
   background: var(--bg-2);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 12px 14px;
   color: var(--text);
@@ -159,22 +134,17 @@ input:not([type="checkbox"]):not([type="radio"]):focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--spray-cyan);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
 }
-/* `<option>` no hereda `color` del `<select>` en todos los navegadores
-   — sin esto, el desplegable abierto también podía quedar con texto
-   claro sobre fondo claro nativo. */
 select option {
-  background: var(--bg-2);
+  background: var(--surface);
   color: var(--text);
 }
 .field input, .field select {
   width: 100%;
 }
 
-/* Campo de contraseña con botón "mostrar" — para poder ver lo que se
-   tipeó antes de enviar (crítico en celular, donde un typo con
-   teclado de símbolos es fácil y no hay forma de notarlo a ciegas). */
 .pw-field { position: relative; }
 .pw-field input { padding-right: 44px; }
 .pw-toggle {
@@ -188,7 +158,8 @@ select option {
   padding: 8px;
   cursor: pointer;
   line-height: 1;
-  opacity: 0.7;
+  opacity: 0.5;
+  color: var(--text-muted);
 }
 .pw-toggle:hover { opacity: 1; }
 
@@ -200,30 +171,29 @@ select option {
   border: none;
   border-radius: var(--radius);
   padding: 12px 20px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
   transition: transform 0.08s ease, box-shadow 0.15s ease, filter 0.15s;
-  box-shadow: 0 3px 0 rgba(0,0,0,0.35);
 }
-.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.35); }
+.btn:active { transform: scale(0.98); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-block { width: 100%; }
 
-.btn-primary { background: var(--spray-pink); color: #1a1620; }
+.btn-primary { background: var(--accent); color: #FFFFFF; }
 .btn-primary:hover { filter: brightness(1.08); }
-.btn-accent { background: var(--spray-yellow); color: #1a1620; }
+.btn-accent { background: var(--accent); color: #FFFFFF; }
 .btn-accent:hover { filter: brightness(1.08); }
-.btn-cyan { background: var(--spray-cyan); color: #1a1620; }
-.btn-ghost { background: transparent; color: var(--text); border: 2px solid var(--border); box-shadow: none; }
-.btn-ghost:hover { border-color: var(--spray-cyan); }
-.btn-danger { background: var(--spray-red); color: #1a1620; }
+.btn-cyan { background: var(--accent); color: #FFFFFF; }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-danger { background: var(--danger); color: #FFFFFF; }
 .btn-sm { padding: 7px 12px; font-size: 0.82rem; }
 
 .error-msg {
-  background: rgba(255, 90, 90, 0.12);
-  border: 1px solid var(--spray-red);
-  color: #ffb3b3;
+  background: rgba(255, 59, 48, 0.08);
+  border: 1px solid var(--danger);
+  color: var(--danger);
   padding: 10px 12px;
   border-radius: var(--radius);
   font-size: 0.85rem;
@@ -240,15 +210,15 @@ select option {
   line-height: 1.5;
 }
 
-/* ---------- Barra superior + navegación ---------- */
+/* ---------- Barra superior + navegacion ---------- */
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  background: var(--bg-2);
-  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
   gap: 12px;
 }
@@ -267,37 +237,31 @@ select option {
 .role-badge {
   font-family: var(--font-heading);
   font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   padding: 4px 10px;
   border-radius: 999px;
   text-transform: uppercase;
 }
-.role-badge.admin { background: rgba(212, 241, 60, 0.18); color: var(--spray-yellow); border: 1px solid var(--spray-yellow); }
-.role-badge.encargado { background: rgba(61, 219, 224, 0.18); color: var(--spray-cyan); border: 1px solid var(--spray-cyan); }
+.role-badge.admin { background: rgba(0, 113, 227, 0.1); color: var(--accent); border: 1px solid var(--accent); }
+.role-badge.encargado { background: rgba(52, 199, 89, 0.1); color: var(--success); border: 1px solid var(--success); }
 
 nav.tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   padding: 10px 20px;
-  background: var(--bg);
-  border-bottom: 2px solid var(--border);
-  /* Antes solo scrolleaba horizontal (overflow-x:auto) sin ninguna
-     pista visual de que había más — en celular (~390px) "Usuarios" y
-     "Manual" quedaban totalmente fuera de pantalla, invisibles, y
-     nadie iba a adivinar que había que deslizar el nav para
-     encontrarlos. Bug real reportado por el usuario. Con flex-wrap
-     todas las pestañas quedan siempre visibles (pasan a una segunda
-     fila si no entran) — en desktop no cambia nada, ya entraban todas
-     en una sola línea. */
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
   overflow-x: auto;
 }
 nav.tabs button {
   background: transparent;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   color: var(--text-muted);
   font-family: var(--font-heading);
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   padding: 9px 16px;
   border-radius: var(--radius);
   cursor: pointer;
@@ -306,8 +270,8 @@ nav.tabs button {
 }
 nav.tabs button:hover { color: var(--text); }
 nav.tabs button.active {
-  color: var(--bg);
-  background: var(--spray-pink);
+  color: #FFFFFF;
+  background: var(--accent);
 }
 
 main {
@@ -325,7 +289,7 @@ main {
 
 .card {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 20px;
   margin-bottom: 18px;
@@ -342,25 +306,25 @@ main {
   gap: 12px;
 }
 .product-tile {
-  background: var(--surface-2);
-  border: 2px solid var(--border);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.15s, transform 0.08s;
+  transition: border-color 0.15s, transform 0.08s, box-shadow 0.15s;
 }
-.product-tile:hover { border-color: var(--spray-cyan); }
+.product-tile:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0, 113, 227, 0.1); }
 .product-tile:active { transform: scale(0.97); }
 .product-tile.out { opacity: 0.4; cursor: not-allowed; }
-.product-tile .name { font-weight: 700; margin-bottom: 4px; }
-.product-tile .price { font-family: var(--font-heading); color: var(--spray-yellow); font-size: 1.1rem; }
+.product-tile .name { font-weight: 600; margin-bottom: 4px; }
+.product-tile .price { font-weight: 700; color: var(--text); font-size: 1.1rem; }
 .product-tile .stock { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; }
 .product-tile .cost { font-size: 0.7rem; color: var(--text-dim); }
 
 table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); }
-th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+th { color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
 tr:last-child td { border-bottom: none; }
 td.num { text-align: right; font-variant-numeric: tabular-nums; }
 
@@ -369,13 +333,13 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   padding: 3px 10px;
   border-radius: 999px;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
-.chip.abierta { background: rgba(255, 138, 61, 0.18); color: var(--spray-orange); border: 1px solid var(--spray-orange); }
-.chip.saldada { background: rgba(212, 241, 60, 0.15); color: var(--spray-yellow); border: 1px solid var(--spray-yellow); }
-.chip.inversionista { background: rgba(255, 77, 148, 0.15); color: var(--spray-pink); border: 1px solid var(--spray-pink); }
+.chip.abierta { background: rgba(255, 149, 0, 0.1); color: var(--warning); border: 1px solid var(--warning); }
+.chip.saldada { background: rgba(52, 199, 89, 0.1); color: var(--success); border: 1px solid var(--success); }
+.chip.inversionista { background: rgba(0, 113, 227, 0.1); color: var(--accent); border: 1px solid var(--accent); }
 
 /* ---------- Carrito de venta ---------- */
 
@@ -384,26 +348,26 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .qty-stepper { display: flex; align-items: center; gap: 8px; }
 .qty-stepper button {
   width: 28px; height: 28px; border-radius: 50%;
-  border: 2px solid var(--border); background: var(--bg-2); color: var(--text);
+  border: 1px solid var(--border); background: var(--bg-2); color: var(--text);
   cursor: pointer; font-weight: 700; font-size: 1rem; line-height: 1;
 }
-.qty-stepper button:hover { border-color: var(--spray-cyan); }
+.qty-stepper button:hover { border-color: var(--accent); color: var(--accent); }
 
 .payment-methods { display: flex; gap: 10px; flex-wrap: wrap; }
 .payment-methods button {
   flex: 1;
   min-width: 100px;
   padding: 14px;
-  background: var(--surface-2);
-  border: 2px solid var(--border);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text);
-  font-family: var(--font-heading);
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   cursor: pointer;
   font-size: 0.9rem;
 }
-.payment-methods button.selected { border-color: var(--spray-yellow); background: rgba(212,241,60,0.12); color: var(--spray-yellow); }
+.payment-methods button.selected { border-color: var(--accent); background: rgba(0, 113, 227, 0.08); color: var(--accent); }
 
 .total-row {
   display: flex;
@@ -411,24 +375,24 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   align-items: baseline;
   padding-top: 12px;
   margin-top: 8px;
-  border-top: 2px dashed var(--border);
+  border-top: 1px dashed var(--border);
 }
-.total-row .label { font-family: var(--font-heading); color: var(--text-muted); letter-spacing: 0.05em; }
-.total-row .value { font-family: var(--font-heading); font-size: 1.6rem; color: var(--spray-yellow); }
+.total-row .label { font-weight: 600; color: var(--text-muted); letter-spacing: 0.02em; }
+.total-row .value { font-weight: 700; font-size: 1.6rem; color: var(--text); }
 
-/* ---------- Manual (pestaña de ayuda) ---------- */
+/* ---------- Manual (pestana de ayuda) ---------- */
 
 .manual-item {
-  border-top: 2px dashed var(--border);
+  border-top: 1px dashed var(--border);
   padding: 16px 0;
 }
 .manual-item:first-of-type { border-top: none; padding-top: 6px; }
 .manual-item summary {
   cursor: pointer;
-  font-family: var(--font-heading);
-  letter-spacing: 0.03em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   font-size: 1.05rem;
-  color: var(--spray-cyan);
+  color: var(--accent);
   list-style: none;
   display: flex;
   align-items: center;
@@ -436,8 +400,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 }
 .manual-item summary::-webkit-details-marker { display: none; }
 .manual-item summary::before {
-  content: "▸";
-  color: var(--spray-pink);
+  content: "\25B8";
+  color: var(--accent);
   display: inline-block;
   transition: transform 0.15s ease;
   flex-shrink: 0;
@@ -460,7 +424,8 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .modal-backdrop {
   display: none;
   position: fixed; inset: 0;
-  background: rgba(10, 8, 14, 0.7);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
   align-items: center; justify-content: center;
   padding: 20px;
   z-index: 50;
@@ -468,14 +433,14 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .modal-backdrop.visible { display: flex; }
 .modal {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px;
   width: 100%;
   max-width: 420px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
 }
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .modal-close { background: none; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
@@ -487,19 +452,19 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--surface-2);
-  border: 2px solid var(--spray-yellow);
-  color: var(--text);
+  background: var(--text);
+  color: var(--bg);
   padding: 12px 20px;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s, transform 0.2s;
   z-index: 100;
   max-width: 90vw;
+  font-weight: 500;
 }
-#toast.error { border-color: var(--spray-red); }
+#toast.error { background: var(--danger); color: #FFFFFF; }
 #toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
 /* ---------- Utilidades ---------- */
@@ -508,16 +473,14 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
 .flex-between { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 .mt { margin-top: 16px; }
 .empty-state { text-align: center; padding: 30px 10px; color: var(--text-dim); }
-/* Dentro de un grid (ej. product-grid vacío), el mensaje no debe
-   quedar comprimido en la primera columna — que ocupe todo el ancho. */
 .product-grid .empty-state { grid-column: 1 / -1; }
-.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--text-dim); border-top-color: var(--spray-pink); border-radius: 50%; animation: spin 0.7s linear infinite; }
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--text-dim); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .list-item {
   display: flex; justify-content: space-between; align-items: center;
   padding: 12px 14px; border-radius: var(--radius);
-  background: var(--surface-2); border: 2px solid var(--border);
+  background: var(--bg-2); border: 1px solid var(--border);
   margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s;
 }
-.list-item:hover { border-color: var(--spray-cyan); }
+.list-item:hover { border-color: var(--accent); }

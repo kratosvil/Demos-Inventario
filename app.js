@@ -1,10 +1,10 @@
 "use strict";
 
 /* =========================================================================
-   Coroto — Demo interactivo (sin backend)
+   iStore — Demo interactivo (sin backend)
    =========================================================================
-   Versión demo con datos mockeados en memoria. No requiere servidor —
-   funciona como archivo estático en GitHub Pages o cualquier hosting.
+   Version demo con datos mockeados en memoria. No requiere servidor —
+   funciona como archivo estatico en GitHub Pages o cualquier hosting.
    ========================================================================= */
 
 // ---------------------------------------------------------------- Mock API --
@@ -15,33 +15,33 @@ const DEMO_USUARIOS = [
 ];
 
 const DEMO_PRODUCTOS = [
-  { id: 1, nombre: "Cerveza Nacional", categoria: "Cervezas", stock_unidades: 48, costo_por_unidad: 2200, costo_por_caja: 52800, precio_venta_unidad: 4000, unidad_compra: "paca", factor_conversion: 24, margen_pct: 82, activo: true },
-  { id: 2, nombre: "Cerveza Premium", categoria: "Cervezas", stock_unidades: 24, costo_por_unidad: 3500, costo_por_caja: 42000, precio_venta_unidad: 6000, unidad_compra: "paca", factor_conversion: 12, margen_pct: 71, activo: true },
-  { id: 3, nombre: "Cerveza Importada", categoria: "Cervezas", stock_unidades: 12, costo_por_unidad: 5000, costo_por_caja: 60000, precio_venta_unidad: 9000, unidad_compra: "paca", factor_conversion: 12, margen_pct: 80, activo: true },
-  { id: 4, nombre: "Gaseosa 350ml", categoria: "Bebidas", stock_unidades: 36, costo_por_unidad: 1200, costo_por_caja: 28800, precio_venta_unidad: 3000, unidad_compra: "paca", factor_conversion: 24, margen_pct: 150, activo: true },
-  { id: 5, nombre: "Agua 600ml", categoria: "Bebidas", stock_unidades: 24, costo_por_unidad: 800, costo_por_caja: 19200, precio_venta_unidad: 2500, unidad_compra: "paca", factor_conversion: 24, margen_pct: 213, activo: true },
-  { id: 6, nombre: "Papas snack", categoria: "Snacks", stock_unidades: 20, costo_por_unidad: 1500, costo_por_caja: 18000, precio_venta_unidad: 3500, unidad_compra: "caja", factor_conversion: 12, margen_pct: 133, activo: true },
-  { id: 7, nombre: "Licor de la casa 750ml", categoria: "Licores", stock_unidades: 8, costo_por_unidad: 25000, costo_por_caja: 150000, precio_venta_unidad: 45000, unidad_compra: "caja", factor_conversion: 6, margen_pct: 80, activo: true },
-  { id: 8, nombre: "Coctel preparado", categoria: "Licores", stock_unidades: 15, costo_por_unidad: 4000, costo_por_caja: 48000, precio_venta_unidad: 12000, unidad_compra: "caja", factor_conversion: 12, margen_pct: 200, activo: true },
+  { id: 1, nombre: "MacBook Air M3", categoria: "Laptops", stock_unidades: 12, costo_por_unidad: 3440000, costo_por_caja: 3440000, precio_venta_unidad: 4299000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 2, nombre: "MacBook Pro 14\" M3 Pro", categoria: "Laptops", stock_unidades: 6, costo_por_unidad: 5999000, costo_por_caja: 5999000, precio_venta_unidad: 7499000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 3, nombre: "iPad Air M2", categoria: "Tablets", stock_unidades: 15, costo_por_unidad: 2159000, costo_por_caja: 2159000, precio_venta_unidad: 2699000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 4, nombre: "iPad Pro 13\" M4", categoria: "Tablets", stock_unidades: 8, costo_por_unidad: 4159000, costo_por_caja: 4159000, precio_venta_unidad: 5199000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 5, nombre: "Apple Watch Series 10", categoria: "Wearables", stock_unidades: 20, costo_por_unidad: 1439000, costo_por_caja: 1439000, precio_venta_unidad: 1799000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 6, nombre: "AirPods Pro 2", categoria: "Audio", stock_unidades: 25, costo_por_unidad: 919000, costo_por_caja: 919000, precio_venta_unidad: 1149000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 7, nombre: "iPhone 16 Pro 256GB", categoria: "iPhone", stock_unidades: 10, costo_por_unidad: 4399000, costo_por_caja: 4399000, precio_venta_unidad: 5499000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
+  { id: 8, nombre: "Magic Keyboard", categoria: "Accesorios", stock_unidades: 18, costo_por_unidad: 479000, costo_por_caja: 479000, precio_venta_unidad: 599000, unidad_compra: "unidad", factor_conversion: 1, margen_pct: 25, activo: true },
 ];
 
 const DEMO_CLIENTES = [
-  { id: 1, nombre: "Mesa 3", es_inversionista: false, pct_descuento: 0, activo: true, estado: "abierta", saldo_pendiente: 16000, total_a_cobrar: 16000, descuento_estimado: 0, consumos_pendientes: [{ producto_nombre: "Cerveza Nacional", cantidad: 2, subtotal: 8000 }, { producto_nombre: "Papas snack", cantidad: 1, subtotal: 3500 }, { producto_nombre: "Agua 600ml", cantidad: 1, subtotal: 2500 }, { producto_nombre: "Gaseosa 350ml", cantidad: 1, subtotal: 2000, }], creado_por_nombre: "encargado" },
-  { id: 2, nombre: "Carlos (socio)", es_inversionista: true, pct_descuento: 15, activo: true, estado: "abierta", saldo_pendiente: 30000, total_a_cobrar: 25500, descuento_estimado: 4500, consumos_pendientes: [{ producto_nombre: "Cerveza Premium", cantidad: 3, subtotal: 18000 }, { producto_nombre: "Coctel preparado", cantidad: 1, subtotal: 12000 }], creado_por_nombre: "admin" },
-  { id: 3, nombre: "Andrea", es_inversionista: false, pct_descuento: 0, activo: true, estado: "saldada", saldo_pendiente: 0, total_a_cobrar: 0, descuento_estimado: 0, consumos_pendientes: [], creado_por_nombre: "admin" },
+  { id: 1, nombre: "Empresa TechCorp", es_inversionista: false, pct_descuento: 0, activo: true, estado: "abierta", saldo_pendiente: 6497000, total_a_cobrar: 6497000, descuento_estimado: 0, consumos_pendientes: [{ producto_nombre: "AirPods Pro 2", cantidad: 2, subtotal: 2298000 }, { producto_nombre: "MacBook Air M3", cantidad: 1, subtotal: 4199000 }], creado_por_nombre: "encargado" },
+  { id: 2, nombre: "Laura Martinez (VIP)", es_inversionista: true, pct_descuento: 10, activo: true, estado: "abierta", saldo_pendiente: 7298000, total_a_cobrar: 6568200, descuento_estimado: 729800, consumos_pendientes: [{ producto_nombre: "iPad Pro 13\" M4", cantidad: 1, subtotal: 5199000 }, { producto_nombre: "Apple Watch Series 10", cantidad: 1, subtotal: 1799000 }, { producto_nombre: "Magic Keyboard", cantidad: 1, subtotal: 599000 }], creado_por_nombre: "admin" },
+  { id: 3, nombre: "Oficina 3er Piso", es_inversionista: false, pct_descuento: 0, activo: true, estado: "saldada", saldo_pendiente: 0, total_a_cobrar: 0, descuento_estimado: 0, consumos_pendientes: [], creado_por_nombre: "admin" },
 ];
 
 const DEMO_VENTAS_REPORTE = {
   por_metodo_pago: [
-    { metodo_pago: "efectivo", cantidad_transacciones: 12, total: 156000 },
-    { metodo_pago: "nequi", cantidad_transacciones: 8, total: 98000 },
-    { metodo_pago: "llave", cantidad_transacciones: 3, total: 45000 },
+    { metodo_pago: "tarjeta", cantidad_transacciones: 18, total: 45600000 },
+    { metodo_pago: "nequi", cantidad_transacciones: 10, total: 12500000 },
+    { metodo_pago: "efectivo", cantidad_transacciones: 5, total: 8900000 },
   ],
   por_usuario: [
-    { usuario_nombre: "admin", cantidad_transacciones: 14, total: 189000 },
-    { usuario_nombre: "encargado", cantidad_transacciones: 9, total: 110000 },
+    { usuario_nombre: "admin", cantidad_transacciones: 20, total: 42000000 },
+    { usuario_nombre: "encargado", cantidad_transacciones: 13, total: 25000000 },
   ],
-  total_general: 299000,
+  total_general: 67000000,
 };
 
 const DEMO_MOVIMIENTOS = [
@@ -738,9 +738,9 @@ async function abrirClienteModal(clienteId) {
     body.appendChild(el("h3", { class: "mt" }, "Liquidar cuenta"));
     let metodoSel = null;
     const metodos = el("div", { class: "payment-methods" }, [
-      el("button", { type: "button", onclick: (e) => seleccionar(e, "efectivo") }, "Efectivo"),
+      el("button", { type: "button", onclick: (e) => seleccionar(e, "tarjeta") }, "Tarjeta"),
       el("button", { type: "button", onclick: (e) => seleccionar(e, "nequi") }, "Nequi"),
-      el("button", { type: "button", onclick: (e) => seleccionar(e, "llave") }, "Llave"),
+      el("button", { type: "button", onclick: (e) => seleccionar(e, "efectivo") }, "Efectivo"),
     ]);
     function seleccionar(e, m) {
       metodoSel = m;
@@ -1251,7 +1251,7 @@ document.querySelectorAll(".pw-toggle").forEach((btn) => {
 // Banner de demo
 (function addDemoBanner() {
   const banner = document.createElement("div");
-  banner.style.cssText = "position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(90deg,#ff4d94,#3ddbe0);color:#1a1620;text-align:center;padding:6px 12px;font-size:0.82rem;font-weight:700;letter-spacing:0.04em;";
+  banner.style.cssText = "position:fixed;top:0;left:0;right:0;z-index:200;background:#0071E3;color:#FFFFFF;text-align:center;padding:6px 12px;font-size:0.82rem;font-weight:600;letter-spacing:0.02em;font-family:Inter,-apple-system,sans-serif;";
   banner.innerHTML = 'DEMO INTERACTIVO — los datos viven en memoria, no se guardan. Usuario: <b>admin</b> / Contrasena: <b>cualquiera</b>';
   document.body.prepend(banner);
   document.body.style.paddingTop = "32px";
