@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coroto</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ LOGIN ============ -->
+  <section id="login-screen" class="screen visible">
+    <div class="auth-card">
+      <div class="brand">
+        <img class="brand-logo" src="logo-coroto.png" alt="Coroto Club" />
+        <span class="sub">Caja &amp; Inventario</span>
+      </div>
+      <div id="login-error" class="error-msg"></div>
+      <form id="login-form">
+        <div class="field">
+          <label for="login-usuario">Usuario</label>
+          <input id="login-usuario" name="usuario" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required />
+        </div>
+        <div class="field">
+          <label for="login-password">Contraseña</label>
+          <div class="pw-field">
+            <input id="login-password" name="password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" required />
+            <button type="button" class="pw-toggle" data-toggle-for="login-password" aria-label="Mostrar contraseña">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="login-submit">Entrar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ CAMBIO DE PASSWORD OBLIGATORIO ============ -->
+  <section id="password-screen" class="screen">
+    <div class="auth-card">
+      <div class="brand">
+        <img class="brand-logo" src="logo-coroto.png" alt="Coroto Club" />
+        <span class="sub">Nueva contraseña</span>
+      </div>
+      <p class="muted">Tu contraseña es provisional. Cámbiala para poder seguir — no vuelve a pedirse hasta que quieras cambiarla de nuevo.</p>
+      <div id="password-error" class="error-msg"></div>
+      <form id="password-form">
+        <div class="field">
+          <label for="pw-actual">Contraseña actual</label>
+          <div class="pw-field">
+            <input id="pw-actual" type="password" autocapitalize="off" autocorrect="off" spellcheck="false" required />
+            <button type="button" class="pw-toggle" data-toggle-for="pw-actual" aria-label="Mostrar contraseña">👁</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="pw-nueva">Contraseña nueva (mínimo 12 caracteres)</label>
+          <div class="pw-field">
+            <input id="pw-nueva" type="password" minlength="12" autocapitalize="off" autocorrect="off" spellcheck="false" required />
+            <button type="button" class="pw-toggle" data-toggle-for="pw-nueva" aria-label="Mostrar contraseña">👁</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="pw-confirma">Repetir contraseña nueva</label>
+          <div class="pw-field">
+            <input id="pw-confirma" type="password" minlength="12" autocapitalize="off" autocorrect="off" spellcheck="false" required />
+            <button type="button" class="pw-toggle" data-toggle-for="pw-confirma" aria-label="Mostrar contraseña">👁</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Cambiar y continuar</button>
+      </form>
+      <p class="hint"><a href="#" id="logout-from-password">Cerrar sesión</a></p>
+    </div>
+  </section>
+
+  <!-- ============ APP ============ -->
+  <div id="app">
+    <header class="topbar">
+      <img class="brand-mini" src="logo-coroto.png" alt="Coroto Club" />
+      <div class="user-box">
+        <span id="user-nombre"></span>
+        <span id="user-rol" class="role-badge"></span>
+        <button class="btn btn-ghost btn-sm" id="logout-btn">Salir</button>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs"></nav>
+
+    <main>
+      <!-- ---- Venta rápida ---- -->
+      <section class="view" data-view="venta">
+        <div class="grid grid-2">
+          <div class="card">
+            <h2>Venta rápida</h2>
+            <div id="venta-productos" class="product-grid"></div>
+          </div>
+          <div class="card">
+            <h3>Carrito</h3>
+            <div id="carrito-items"><p class="muted" id="carrito-vacio">Sin productos todavía</p></div>
+            <div class="total-row">
+              <span class="label">Total</span>
+              <span class="value" id="carrito-total">$0</span>
+            </div>
+            <h3 class="mt">Método de pago</h3>
+            <div class="payment-methods" id="metodo-pago-venta">
+              <button type="button" data-metodo="efectivo">Efectivo</button>
+              <button type="button" data-metodo="nequi">Nequi</button>
+              <button type="button" data-metodo="llave">Llave</button>
+            </div>
+            <button class="btn btn-accent btn-block mt" id="confirmar-venta" disabled>Confirmar venta</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- Cuentas / clientes frecuentes ---- -->
+      <section class="view" data-view="cuentas">
+        <div class="card">
+          <div class="flex-between">
+            <h2 id="clientes-titulo">Cuentas de clientes frecuentes</h2>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-ghost btn-sm" id="toggle-archivados-btn" data-admin-only>Ver archivados</button>
+              <button class="btn btn-primary btn-sm" id="nuevo-cliente-btn">+ Nuevo cliente</button>
+            </div>
+          </div>
+          <div id="clientes-lista" class="mt"></div>
+        </div>
+      </section>
+
+      <!-- ---- Productos (admin) ---- -->
+      <section class="view" data-view="productos">
+        <div class="card">
+          <div class="flex-between">
+            <h2 id="productos-titulo">Productos</h2>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-ghost btn-sm" id="toggle-productos-archivados-btn">Ver archivados</button>
+              <button class="btn btn-primary btn-sm" id="nuevo-producto-btn">+ Nuevo producto</button>
+            </div>
+          </div>
+          <div class="mt" style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr><th>Producto</th><th>Categoría</th><th class="num">Stock</th><th class="num">Costo/u</th><th class="num">Precio</th><th class="num">Margen</th><th></th></tr>
+              </thead>
+              <tbody id="productos-tabla"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- Reportes (admin) ---- -->
+      <section class="view" data-view="reportes">
+        <div class="card">
+          <h2>Ventas — por método de pago y por usuario</h2>
+          <div class="payment-methods" id="reporte-modo-rango">
+            <button type="button" data-modo="horas" class="selected">Últimas horas</button>
+            <button type="button" data-modo="fechas">Rango de fechas</button>
+          </div>
+          <div class="flex-between mt" id="reporte-filtro-horas">
+            <div class="field" style="max-width:160px">
+              <label for="reporte-horas">Últimas horas</label>
+              <input id="reporte-horas" type="number" value="24" min="1" />
+            </div>
+            <button class="btn btn-cyan btn-sm" id="reporte-ventas-btn">Consultar</button>
+          </div>
+          <div class="flex-between mt" id="reporte-filtro-fechas" style="display:none">
+            <div class="field" style="max-width:170px">
+              <label for="reporte-desde">Desde</label>
+              <input id="reporte-desde" type="date" />
+            </div>
+            <div class="field" style="max-width:170px">
+              <label for="reporte-hasta">Hasta</label>
+              <input id="reporte-hasta" type="date" />
+            </div>
+            <button class="btn btn-cyan btn-sm" id="reporte-ventas-fechas-btn">Consultar</button>
+          </div>
+          <div id="reporte-ventas-resultado" class="mt"></div>
+        </div>
+        <div class="card">
+          <h2>Deuda pendiente</h2>
+          <div id="reporte-deuda-resultado" class="mt"></div>
+        </div>
+        <div class="card">
+          <h2>Usuarios — activos, inactivos y quién los creó</h2>
+          <div id="reporte-usuarios-resultado" class="mt"></div>
+        </div>
+      </section>
+
+      <!-- ---- Usuarios (admin) ---- -->
+      <section class="view" data-view="usuarios">
+        <div class="card">
+          <div class="flex-between">
+            <h2>Usuarios</h2>
+            <button class="btn btn-primary btn-sm" id="nuevo-usuario-btn">+ Nuevo usuario</button>
+          </div>
+          <div id="usuarios-lista" class="mt"></div>
+        </div>
+      </section>
+
+      <!-- ---- Manual (admin y encargado) ---- -->
+      <section class="view" data-view="manual">
+        <div class="card">
+          <h2>Manual — cómo funciona Coroto</h2>
+          <p class="muted">Guía rápida de cada módulo. Tocá un título para abrirlo — no hace falta memorizar nada, quedate acá cuando tengas dudas.</p>
+
+          <details class="manual-item" open>
+            <summary>Venta rápida — cobrar algo al momento</summary>
+            <div class="manual-body">
+              <p>Para cuando alguien pide algo y lo paga ahí mismo (no se queda consumiendo a cuenta).</p>
+              <ol>
+                <li>Tocá los productos que pidió — se van sumando al carrito de la derecha.</li>
+                <li>Elegí el método de pago: Efectivo, Nequi o Llave.</li>
+                <li>Tocá "Confirmar venta". El stock se descuenta solo.</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="manual-item">
+            <summary>Cuentas — clientes que consumen y pagan después</summary>
+            <div class="manual-body">
+              <p>Para mesas o clientes frecuentes que van pidiendo varias cosas y cierran la cuenta al final.</p>
+              <ol>
+                <li><strong>Abrir cuenta:</strong> "+ Nuevo cliente", ponés un nombre (ej. "Mesa 3" o el nombre de la persona). Cualquiera puede abrir una cuenta, admin o encargado.</li>
+                <li><strong>Cargar consumo:</strong> entrá a la cuenta, elegí el producto y la cantidad, "Agregar" — todavía no cobra, solo lo va anotando.</li>
+                <li><strong>Cobrar (liquidar):</strong> cuando se van, entrá a la cuenta y liquidá — elegís el método de pago y se cierra el ciclo. Si el cliente es socio/inversionista con descuento, se aplica solo, no hay que calcular nada a mano.</li>
+                <li><strong>Archivar:</strong> si alguien no vuelve más, se puede archivar la cuenta — no se borra el historial, solo desaparece de la lista (se puede restaurar después con "Ver archivados").</li>
+                <li class="admin-only-hint" data-admin-only>Solo un admin puede marcar a un cliente como socio/inversionista con descuento — si sos encargado y hace falta, pedíselo a un admin.</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="manual-item" data-admin-only>
+            <summary>Productos — catálogo, precios y stock</summary>
+            <div class="manual-body">
+              <p>Acá se maneja todo el inventario: qué se vende, a qué precio, y cuánto queda.</p>
+              <ul>
+                <li><strong>+ Nuevo producto:</strong> das de alta algo nuevo con su costo, precio de venta y stock inicial.</li>
+                <li><strong>Entrá a un producto</strong> para corregir precio/stock a mano, o para "Registrar entrada" (llegó mercancía del proveedor) y "Registrar devolución" (se le devuelve algo al proveedor).</li>
+                <li><strong>Dar de baja / Restaurar:</strong> si un producto se deja de vender, "Dar de baja" lo saca de las listas sin borrar su historial. "Ver archivados" lo muestra de nuevo para poder restaurarlo — hace falta restaurarlo (no crear uno nuevo con el mismo nombre) si vuelve a estar disponible.</li>
+                <li>El costo y el margen solo los ve el admin — el encargado ve el precio de venta, nunca cuánto costó.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="manual-item" data-admin-only>
+            <summary>Reportes — plata, deuda y usuarios</summary>
+            <div class="manual-body">
+              <ul>
+                <li><strong>Ventas:</strong> cuánto entró y por qué método de pago (Efectivo/Nequi/Llave), y quién lo vendió. Se puede filtrar por las últimas horas o por un rango de fechas (ej. toda la semana).</li>
+                <li><strong>Deuda pendiente:</strong> quién todavía debe plata de una cuenta abierta.</li>
+                <li><strong>Usuarios:</strong> lista de quién tiene acceso, si está activo, y quién lo creó.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="manual-item" data-admin-only>
+            <summary>Usuarios — el equipo que usa la app</summary>
+            <div class="manual-body">
+              <ul>
+                <li><strong>+ Nuevo usuario:</strong> creás la cuenta con un rol (admin o encargado) y una contraseña provisional — la persona la cambia sola en su primer ingreso.</li>
+                <li><strong>Resetear contraseña:</strong> si alguien la olvida, le generás una nueva desde acá (⋯ al lado de su nombre).</li>
+                <li><strong>Desactivar:</strong> si alguien deja de trabajar en el club, se desactiva su acceso — no se borra su historial de ventas.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="manual-item">
+            <summary>¿Admin o encargado? ¿Cuál es la diferencia?</summary>
+            <div class="manual-body">
+              <p><strong>Encargado:</strong> vende, abre/carga/cobra cuentas de clientes. No ve costos ni márgenes, no toca el catálogo ni los reportes.</p>
+              <p><strong>Admin:</strong> puede todo lo anterior, más manejar el catálogo de productos, ver reportes y costos, y gestionar usuarios.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============ MODAL genérico ============ -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title" style="margin:0"></h2>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
